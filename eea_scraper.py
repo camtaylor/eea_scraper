@@ -6,7 +6,7 @@ import getpass
 
 if __name__ == "__main__":
   # Time in seconds till next check
-  REFRESH_TIME = 10
+  REFRESH_TIME = 240 
   # Latest list of companies
   current_companies = []
   # Number of companies currently in EEA plus 1 (EEA is a company)
