@@ -6,7 +6,7 @@ import getpass
 
 if __name__ == "__main__":
   # Time in seconds till next check
-  REFRESH_TIME = 240
+  REFRESH_TIME = 10
   # Latest list of companies
   current_companies = []
   # Number of companies currently in EEA plus 1 (EEA is a company)
@@ -30,7 +30,13 @@ if __name__ == "__main__":
   """
   # Infinite scrape 
   while True:
-    eea_html = requests.get("http://entethalliance.org/").text
+    # Get html from eea site
+    try:
+      eea_html = requests.get("http://entethalliance.org/").text
+    except Exception as e:
+      print e
+      time.sleep(REFRESH_TIME)
+      continue
     # Using logo naming convention to pull companies
     companies_list = list(set([company.replace("-logo.png", "") for company in re.findall("[^/]*-logo.png", eea_html)]))
     # A new company has been added
